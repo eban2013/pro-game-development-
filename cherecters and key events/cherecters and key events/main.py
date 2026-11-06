@@ -1,0 +1,48 @@
+import pygame 
+
+pygame.init()
+
+WIDTH=500
+HIGHT=500
+
+run=True
+
+screen = pygame.display.set_mode((WIDTH,HIGHT))
+
+bg=pygame.image.load(r"C:\Users\User\OneDrive\Documents\thomas jet learn coding\pro game development\cherecters and key events\space bg.png")
+ship=pygame.image.load(r"C:\Users\User\OneDrive\Documents\thomas jet learn coding\pro game development\cherecters and key events\rocket charecter.png")
+
+shiprec=pygame.Rect(150,150,150,290)
+
+directions={"up":False,"down":False,"left":False,"right":False}
+
+clock=pygame.time.Clock()
+FPS=240
+
+while run:
+    clock.tick(FPS)
+    screen.blit(bg,(0,0))
+    screen.blit(ship,(shiprec.x,shiprec.y))
+
+    pygame.display.update()
+
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            run=False
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_UP:
+                directions["up"]=True
+        if event.type==pygame.KEYUP:
+            if event.key==pygame.K_UP:
+                directions["up"]=False
+    if directions["up"]:
+        shiprec.y=shiprec.y-1
+    keys=pygame.key.get_pressed()
+    if keys[pygame.K_DOWN]:
+        shiprec.y=shiprec.y+1
+    if keys[pygame.K_LEFT]:
+        shiprec.x=shiprec.x-1
+    if keys[pygame.K_RIGHT]:
+        shiprec.x=shiprec.x+1
+
+pygame.quit()
